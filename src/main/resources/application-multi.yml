@@ -1,0 +1,55 @@
+app:
+  kafka:
+    producer:
+      topic: test
+    consumer:
+      topic: test
+
+kafka:
+  bootstrap-servers: 127.0.0.1:9092
+  producer:
+    producer1:
+      bootstrap-servers: 127.0.0.1:9092
+      topic: topic1
+      retries: 0
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer2:
+      bootstrap-servers: 127.0.0.1:9094
+      topic: topic2
+      retries: 2
+      acks: 1
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  consumer:
+    consumer1:
+      bootstrap-servers: 127.0.0.1:9092
+      topic: topic1
+      group-id: group1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    consumer2:
+      bootstrap-servers: 127.0.0.1:9094
+      topic: topic2
+      group-id: group2
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    relay-consumer1:
+        bootstrap-servers: localhost:9092
+        group-id: relay-group1
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    relay-consumer2:
+        bootstrap-servers: localhost:9094
+        group-id: relay-group2
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+logging:
+  level:
+    root: INFO
